@@ -46,7 +46,7 @@
   
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
+  services.xserver.layout = "br";
   # services.xserver.xkbOptions = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
@@ -67,19 +67,27 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.ava = {
+   users.users.alexvanaxe = {
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
      packages = with pkgs; [
-       bspwm
+        mpv
+        yt-dlp
+        nvim
+        gnome.pomodoro
      ];
    };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     bspwm
+     sxhkb
+     dmenu
+     vim
      wget
+     alacritty
+     wezterm
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
