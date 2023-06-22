@@ -74,7 +74,6 @@
         # Desktops apps
         bspwm
         sxhkd
-        dmenu
         dunst
         polybar
         # media
