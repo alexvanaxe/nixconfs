@@ -54,7 +54,14 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
+  # Enable pipewire instead of pulseaudio
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
