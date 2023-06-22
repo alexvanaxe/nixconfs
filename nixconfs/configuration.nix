@@ -71,23 +71,39 @@
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
      packages = with pkgs; [
+        # Desktops apps
+        bspwm
+        sxhkd
+        dmenu
+        dunst
+        polybar
+        # media
         mpv
         yt-dlp
-        neovim
+        # utilities
         gnome.pomodoro
+        # programming
+        neovim
+        wezterm
+
+        # fonts
+        jetbrains-mono
+
+        # System packages
+        (import ./dmenu.nix)
      ];
    };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
-     bspwm
-     sxhkd
-     dmenu
+     libnotify
+     #utilities
      vim
      wget
      alacritty
-     wezterm
+     git
+     qutebrowser
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
