@@ -73,7 +73,7 @@
      packages = with pkgs; [
         mpv
         yt-dlp
-        nvim
+        neovim
         gnome.pomodoro
      ];
    };
