@@ -82,7 +82,7 @@
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      bspwm
-     sxhkb
+     sxhkd
      dmenu
      vim
      wget
