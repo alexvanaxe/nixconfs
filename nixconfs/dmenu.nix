@@ -2,12 +2,12 @@ with import <nixpkgs> {}; # bring all of Nixpkgs into scope
 
 stdenv.mkDerivation rec {
   name = "ava-dmenu-5.0";
-  src = fetchurl {
+  src = fetchzip {
     url = "https://github.com/alexvanaxe/ava_dmenu/archive/master.zip";
-    sha256 = "";
+    sha256 = "sha256-eXmOmXigs8ICjJfWxu+TxDvkYzyFX24VmHOXL5HtV1U=";
   };
 
-  buildInputs = [ libX11 libXinerama zlib libXft ];
+  buildInputs = [ xorg.libX11 xorg.libXinerama zlib xorg.libXft ];
 
   postPatch = ''
     sed -ri -e 's!\<(dmenu|dmenu_path|stest)\>!'"$out/bin"'/&!g' dmenu_run
