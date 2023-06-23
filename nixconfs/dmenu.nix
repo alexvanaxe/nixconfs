@@ -1,17 +1,13 @@
-{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, zlib, patches ? null }:
+with import <nixpkgs> {}; # bring all of Nixpkgs into scope
 
 stdenv.mkDerivation rec {
-  pname = "ava-dmenu";
-  version = "5.2";
-
-  src = fetchzip {
+  name = "ava-dmenu-5.0";
+  src = fetchurl {
     url = "https://github.com/alexvanaxe/ava_dmenu/archive/master.zip";
     sha256 = "";
   };
 
   buildInputs = [ libX11 libXinerama zlib libXft ];
-
-  inherit patches;
 
   postPatch = ''
     sed -ri -e 's!\<(dmenu|dmenu_path|stest)\>!'"$out/bin"'/&!g' dmenu_run
