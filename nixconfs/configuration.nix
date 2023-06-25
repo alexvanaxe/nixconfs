@@ -12,16 +12,17 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  #boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  #boot.loader.efi.canTouchEfiVariables = true;
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -69,41 +70,71 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.alexvanaxe = {
      isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
      packages = with pkgs; [
-        # Desktops apps
-        bspwm
-        sxhkd
-        dunst
-        polybar
-        # media
-        mpv
-        yt-dlp
-        # utilities
-        gnome.pomodoro
-        # programming
-        neovim
-        wezterm
 
-        # fonts
-        jetbrains-mono
-
-        # System packages
-        (import ./dmenu.nix)
      ];
    };
 
+  programs.light.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     # Desktops apps
+     bspwm
+     sxhkd
+     dunst
+     polybar
+     nitrogen
+     # media
+     mpv
+     yt-dlp
+     sxiv
+     imagemagick
+     light
+
+     # utilities
+     gnome.pomodoro
+     tmux
+     # programming
+     neovim
+     wezterm
+
      libnotify
      #utilities
+     bc
      vim
      wget
      alacritty
      git
      qutebrowser
+     picom
+
+     # Adminitration
+     killall
+     xorg.xbacklight
+     # System packages
+     (import ./dmenu.nix)
    ];
+
+
+  # To enable the font we need to put it in a different config.
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+
+    jetbrains-mono
+   (nerdfonts.override { fonts = [ "Iosevka" "NerdFontsSymbolsOnly" ]; })
+
+     (import ./fonts.nix)
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
