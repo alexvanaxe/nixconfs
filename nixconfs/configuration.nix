@@ -81,24 +81,7 @@
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      # Desktops apps
-     bspwm
-     sxhkd
-     dunst
-     polybar
-     nitrogen
-     # media
-     mpv
-     yt-dlp
-     sxiv
-     imagemagick
      light
-
-     # utilities
-     gnome.pomodoro
-     tmux
-     # programming
-     neovim
-     wezterm
 
      libnotify
      #utilities
@@ -107,14 +90,12 @@
      wget
      alacritty
      git
-     qutebrowser
-     picom
+     firefox
 
      # Adminitration
      killall
      xorg.xbacklight
      # System packages
-     (import ./dmenu.nix)
    ];
 
 
