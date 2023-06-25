@@ -27,6 +27,8 @@ in mkShell {
     tmux
     fzf
     zsh
+    eww
+    xclip
     # programming
     neovim
     wezterm

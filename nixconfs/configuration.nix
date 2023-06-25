@@ -27,6 +27,8 @@
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
+  nixpkgs.config.allowUnfree = true;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -91,11 +93,11 @@
      alacritty
      git
      firefox
+     pavucontrol
 
      # Adminitration
      killall
      xorg.xbacklight
-     # System packages
    ];
 
 
@@ -110,11 +112,13 @@
     mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
+    symbola
+    font-awesome
 
     jetbrains-mono
-   (nerdfonts.override { fonts = [ "Iosevka" "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override { fonts = [ "Iosevka" "NerdFontsSymbolsOnly" ]; })
 
-     (import ./fonts.nix)
+    (import ./fonts.nix)
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
