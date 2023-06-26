@@ -16,9 +16,24 @@
   #boot.loader.grub.efiInstallAsRemovable = true;
   #boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.useOSProber = true;
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "nodev"; # or "nodev" for efi only
+
+  boot.loader.grub.extraEntries = ''
+menuentry 'Arch Linux (on /dev/mapper/VG1-archrootlv)' --class arch --class gnu-linux --class gnu --class os $menuentry_id_option 'osprober-gnulinux-simple-29677ac8-7bac-419f-aa74-46497c26c65e' {
+        insmod part_gpt
+        insmod fat
+        set root='hd0,gpt2'
+        if [ x$feature_platform_search_hint = xy ]; then
+          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt2 --hint-efi=hd0,gpt2 --hint-baremetal=ahci0,gpt2  A236-0F99
+        else
+          search --no-floppy --fs-uuid --set=root A236-0F99
+        fi
+        linux //vmlinuz-linux root=/dev/mapper/VG1-archrootlv rw quiet
+        initrd //initramfs-linux.img
+} 
+'';
 
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
